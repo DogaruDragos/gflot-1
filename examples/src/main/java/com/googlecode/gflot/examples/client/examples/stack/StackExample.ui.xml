@@ -25,6 +25,7 @@
       <g:RadioButton ui:field="bars" text="Bars" name="graphControls" value="true" />
       <g:RadioButton ui:field="lines" text="Lines" name="graphControls" />
       <g:RadioButton ui:field="linesStep" text="Lines with steps" name="graphControls" />
+      <g:RadioButton ui:field="bubbles" text="Bubbles" name="graphControls" />
     </p>
   </g:HTMLPanel>
 </ui:UiBinder>

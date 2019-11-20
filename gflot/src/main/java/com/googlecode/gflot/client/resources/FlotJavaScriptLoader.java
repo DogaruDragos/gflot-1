@@ -84,6 +84,8 @@ public class FlotJavaScriptLoader
 
         PluginLoader getFlotFillBetweenLoader();
 
+        PluginLoader getFlotBubbleLoader();
+
         PluginLoader getFlotFillAreaLoader();
 
         PluginLoader getFlotTimeLoader();
@@ -113,6 +115,8 @@ public class FlotJavaScriptLoader
         private PluginLoader flotImageLoader;
 
         private PluginLoader flotPieLoader;
+
+        private PluginLoader flotBubbleLoader;
 
         private PluginLoader flotStackLoader;
 
@@ -217,6 +221,15 @@ public class FlotJavaScriptLoader
                 flotPieLoader = GWT.create( FlotPieLoader.class );
             }
             return flotPieLoader;
+        }
+        @Override
+        public PluginLoader getFlotBubbleLoader()
+        {
+            if ( null == flotBubbleLoader )
+            {
+                flotBubbleLoader = GWT.create( FlotBubbleLoader.class );
+            }
+            return flotBubbleLoader;
         }
 
         @Override
@@ -413,6 +426,7 @@ public class FlotJavaScriptLoader
             getFlotCanvasLoader().load();
             getFlotErrorBarsLoader().load();
             getFlotCategoriesLoader().load();
+            getFlotBubbleLoader().load();
             getFlotBackgroundLoader().load();
         }
     }

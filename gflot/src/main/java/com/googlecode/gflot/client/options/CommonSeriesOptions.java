@@ -121,6 +121,7 @@ public abstract class CommonSeriesOptions<T extends CommonSeriesOptions<?>>
     }
 
     private static final String LINE_SERIES_KEY = "lines";
+    private static final String BUBBLES_SERIES_KEY = "bubbles";
     private static final String BAR_SERIES_KEY = "bars";
     private static final String POINTS_SERIES_KEY = "points";
     private static final String IMAGES_SERIES_KEY = "images";
@@ -151,6 +152,29 @@ public abstract class CommonSeriesOptions<T extends CommonSeriesOptions<?>>
     {
         return getJsObject( LINE_SERIES_KEY );
     }
+
+
+
+    /**
+     * BUBBLE OPTIONS!
+     * */
+
+    public final T setBubblesSeriesOptions(BubblesSeriesOptions bubblesSeriesOptions )
+    {
+        put(BUBBLES_SERIES_KEY, bubblesSeriesOptions);
+        return (T) this;
+    }
+
+    /**
+     * @return global Line series options
+     */
+    public final BubblesSeriesOptions getBubblesSeriesOptions()
+    {
+        return getJsObject(BUBBLES_SERIES_KEY);
+    }
+
+
+
 
     /**
      * Set global Bar series options that will be used unless options are set directly to the series

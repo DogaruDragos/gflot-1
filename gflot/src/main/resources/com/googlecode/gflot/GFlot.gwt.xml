@@ -51,6 +51,7 @@
   <define-property name="gflot.load.flot.canvas" values="ENABLED, DISABLED" />
   <define-property name="gflot.load.flot.errorbars" values="ENABLED, DISABLED" />
   <define-property name="gflot.load.flot.categories" values="ENABLED, DISABLED" />
+  <define-property name="gflot.load.flot.bubbles" values="ENABLED, DISABLED" />
 
   <!-- Default values -->
   <set-property name="gflot.load" value="ENABLED" />
@@ -74,6 +75,7 @@
   <set-property name="gflot.load.flot.canvas" value="DISABLED" />
   <set-property name="gflot.load.flot.errorbars" value="ENABLED" />
   <set-property name="gflot.load.flot.categories" value="ENABLED" />
+  <set-property name="gflot.load.flot.bubbles" value="ENABLED" />
 
   <!-- Load excanvas only for IE < 9 -->
   <replace-with class="com.googlecode.gflot.client.resources.NullLoader">

@@ -14,11 +14,7 @@ import com.googlecode.gflot.client.PlotModel;
 import com.googlecode.gflot.client.Series;
 import com.googlecode.gflot.client.SeriesHandler;
 import com.googlecode.gflot.client.SimplePlot;
-import com.googlecode.gflot.client.options.BarSeriesOptions;
-import com.googlecode.gflot.client.options.GlobalSeriesOptions;
-import com.googlecode.gflot.client.options.LegendOptions;
-import com.googlecode.gflot.client.options.LineSeriesOptions;
-import com.googlecode.gflot.client.options.PlotOptions;
+import com.googlecode.gflot.client.options.*;
 import com.googlecode.gflot.examples.client.examples.DefaultActivity;
 import com.googlecode.gflot.examples.client.resources.Resources;
 import com.googlecode.gflot.examples.client.source.SourceAnnotations.GFlotExamplesRaw;
@@ -48,6 +44,10 @@ public class StackExample
     @UiField
     RadioButton linesStep;
 
+
+    @UiField
+    RadioButton bubbles;
+
     @UiField( provided = true )
     SimplePlot plot;
 
@@ -65,9 +65,15 @@ public class StackExample
         PlotModel model = new PlotModel();
         PlotOptions plotOptions = PlotOptions.create();
         plotOptions.setGlobalSeriesOptions( GlobalSeriesOptions.create()
-            .setLineSeriesOptions( LineSeriesOptions.create().setShow( false ).setFill( true ) )
-            .setBarsSeriesOptions( BarSeriesOptions.create().setShow( true ).setBarWidth( 0.6 ) ).setStack( true ) );
-        plotOptions.setLegendOptions( LegendOptions.create().setShow( false ) );
+//            .setLineSeriesOptions( LineSeriesOptions.create().setShow( false ).setFill( true ) )
+                .setBubblesSeriesOptions(BubblesSeriesOptions.create().setShow(true).setActive(true).setFill(true).setLineWidth(0).setFillColor("rgb(255, 164, 0)")
+                        .setBubbleLabel(BubblesSeriesOptions.BubbleLabel.create().setShowLabel(true))
+                        .setHighlight(BubblesSeriesOptions.BubbleHighlight.create().setShowHighlight(true).setOpacityHighlight(0.9))
+//            .setBarsSeriesOptions( BarSeriesOptions.create().setShow( false ).setBarWidth( 0.6 ) ).setStack( true )
+                ).setHighlightColor("rgb(0,0,255)")
+        );
+        plotOptions.setGridOptions(GridOptions.create().setHoverable(true));
+//        plotOptions.setLegendOptions( LegendOptions.create().setShow( false ) );
 
         // create series
         SeriesHandler series1 = model.addSeries( Series.of( "Series1" ) );
@@ -77,9 +83,9 @@ public class StackExample
         // add data
         for ( int i = 0; i < 10; i++ )
         {
-            series1.add( DataPoint.of( i, Random.nextInt( 30 ) ) );
-            series2.add( DataPoint.of( i, Random.nextInt( 30 ) ) );
-            series3.add( DataPoint.of( i, Random.nextInt( 30 ) ) );
+            series1.add( DataPoint.of( i, Random.nextInt( 30 ) , i) );
+            series2.add( DataPoint.of( i, Random.nextInt( 30 ) , i) );
+            series3.add( DataPoint.of( i, Random.nextInt( 30 ) , i) );
         }
 
         // create the plot
@@ -109,14 +115,17 @@ public class StackExample
     /**
      * When the type of graph changes
      */
-    @UiHandler( { "bars", "lines", "linesStep" } )
+    @UiHandler( { "bars", "lines", "linesStep", "bubbles" } )
     @GFlotExamplesSource
     void onValueChangeGraphType( ValueChangeEvent<Boolean> event )
     {
         GlobalSeriesOptions options = plot.getOptions().getGlobalSeriesOptions();
-        options.getLineSeriesOptions().setShow( lines.getValue() || linesStep.getValue() )
-            .setSteps( linesStep.getValue() );
-        options.getBarSeriesOptions().setShow( bars.getValue() );
+        boolean b =  bubbles.getValue();
+        options.getBubblesSeriesOptions().setShow( bubbles.getValue() );
+//        options.getLineSeriesOptions().setShow(false )
+//            .setSteps( false);
+//        options.getBarSeriesOptions().setShow(false );
+
 
         plot.redraw();
     }
